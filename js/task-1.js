@@ -1,5 +1,12 @@
 function slugify(title) {
-  return title.toLowerCase().split(' ').join('-');
+  return title
+    .toUpperCase()
+    .toLowerCase()
+    .trim()
+    .normalize('NFD')
+    .split(' ')
+    .join('-')
+    .replace(/[^\w\-]+/g, '');
 }
 
 console.log('task-1.js sonuçları');
