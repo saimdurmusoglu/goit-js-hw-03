@@ -6,7 +6,7 @@ function slugify(title) {
     .normalize('NFD')
     .split(' ')
     .join('-')
-    .replace(/[^\w\-]+/g, '');
+    .replace(/[^\w\-]+/g, ''); //replace alfanumerik dışındaki karakterleri siler.
 }
 
 console.log('task-1.js sonuçları');
