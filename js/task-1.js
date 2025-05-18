@@ -1,12 +1,23 @@
 function slugify(title) {
-  return title
-    .toUpperCase()
-    .toLowerCase()
-    .trim()
-    .normalize('NFD')
-    .split(' ')
-    .join('-')
-    .replace(/[^\w\-]+/g, ''); //replace alfanumerik dışındaki karakterleri siler.
+  // Türkçe büyük karakterleri küçük karakterlere dönüştür
+  const turkishChars = {
+    ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', Ö: 'o', Ş: 's', Ü: 'u',
+  };
+
+  // Türkçe karakterleri dönüştür
+  title = title
+    .split('')
+    .map(char => turkishChars[char] || char)
+    .join('');
+
+  // Alfanümerik olmayan karakterleri temizle: sadece harf, rakam, boşluk ve tireyi tut
+  title = title
+    .split('')
+    .filter(char => /^[a-z0-9\s-]$/i.test(char))
+    .join('');
+
+  // Küçük harfe dönüştür, kelimeleri ayır, boşlukları tire ile birleştir
+  return title.toLowerCase().split(/\s+/).join('-');
 }
 
 console.log('task-1.js sonuçları');
